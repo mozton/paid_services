@@ -10,7 +10,8 @@ class CustomInputField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool obscureText;
   final int? intText;
-  
+  final TextEditingController controller;
+
 
   final String formProperty;
   final Map<String, String> formValues;
@@ -27,15 +28,17 @@ class CustomInputField extends StatelessWidget {
     this.obscureText = false, 
     required this.formProperty, 
     required this.formValues, 
-    this.intText,
+    this.intText, 
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
 
     return TextFormField(
+      controller: controller,
       autofocus: false,
-      initialValue: '',
+      
       textCapitalization: TextCapitalization.words,
       keyboardType: keyboardType,
       obscureText: obscureText,

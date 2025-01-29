@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:paid_services/widgets/custom_input_field.dart';
-import 'package:device_calendar/device_calendar.dart';
+
 
 class ManageServices extends StatefulWidget {
 
@@ -10,8 +10,12 @@ class ManageServices extends StatefulWidget {
   State<ManageServices> createState() => _ManageServicesState();
   
 }
-Location _currentLocation = getLocation('Etc/UTC');
 class _ManageServicesState extends State<ManageServices> {
+
+final TextEditingController _servicesController = TextEditingController();
+final TextEditingController _amountController = TextEditingController();
+final TextEditingController _dateController = TextEditingController();
+
   @override
   
   Widget build(BuildContext context) {
@@ -30,7 +34,8 @@ class _ManageServicesState extends State<ManageServices> {
               child: Column(
                 children: [
       
-                  const CustomInputField(
+                  CustomInputField(
+                    controller: _servicesController,
                     hintText: "Service Name",
                     labelText: "Service",
                     helperText: "Name of the service",
@@ -40,8 +45,9 @@ class _ManageServicesState extends State<ManageServices> {
                     keyboardType: TextInputType.text,
                     
                   ),
-                  const CustomInputField(
+                  CustomInputField(
                     hintText: "Amount",
+                    controller: _amountController,
                     labelText: "amount",
                     helperText: "amount of the service",
                     intText: 0,
@@ -50,8 +56,8 @@ class _ManageServicesState extends State<ManageServices> {
                     formValues: {},
                     keyboardType: TextInputType.number,
                   ),
-                     const CustomInputField(
-                   
+                      CustomInputField(
+                    controller: _dateController,
                     hintText: "Date",
                     labelText: "date",
                     helperText: "date of the service",
@@ -64,7 +70,7 @@ class _ManageServicesState extends State<ManageServices> {
                   const SizedBox(height: 20),
 
                   ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){print([_servicesController.text, _amountController.text, _dateController.text]);},
                      child:const Text("save")),
       
       

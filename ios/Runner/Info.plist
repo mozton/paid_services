@@ -44,9 +44,6 @@
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<key>NSCalendarsUsageDescription</key>
-<string>Esta aplicación necesita acceso a tu calendario</string>
-
 	<true/>
 </dict>
 </plist>

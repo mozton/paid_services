@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paid_services/screens/add_paymet.dart';
 import 'package:paid_services/screens/manage_services.dart';
+import 'package:paid_services/widgets/services_card.dart';
 
 class HomePage extends StatefulWidget {
    
@@ -15,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
      appBar: AppBar(backgroundColor: Colors.blue, 
-      title: const Text(" Services Manager"),
+      title: const Text(" Services Manager", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white ),),
       actions: [IconButton(color: Colors.white,
                   onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const ManageServices() ));
@@ -27,10 +28,8 @@ class _HomePageState extends State<HomePage> {
       ],
       ),
 
-      body:const DecoratedBox (
-          decoration:  BoxDecoration(
-          gradient: LinearGradient(begin:Alignment.topCenter,
-          colors: [Colors.blue,Colors.red])
+      body: DecoratedBox (
+      decoration:const  BoxDecoration(color: const Color.fromARGB(255, 244, 244, 244),
 
       ) ,
       child: SafeArea(
@@ -39,14 +38,12 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                        crossAxisAlignment: CrossAxisAlignment.start,
                        children: [
-                        Row(
+                        const Row(
                           children: [
 
                 // Sección de Pagos Pendientes
-                          Text("Payments Pending", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.normal),),
-                          SizedBox(height: 10),
+                          Text("Payments Pending", style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),),
 
-                     
                 // Sección de Pagos Recientes
                         
                           ],
@@ -54,6 +51,8 @@ class _HomePageState extends State<HomePage> {
 
                      
                         ),  
+                        const SizedBox(height: 15),
+                     ServicesCard ()
            
                        ]
                    ),       
