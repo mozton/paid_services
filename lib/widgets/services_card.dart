@@ -42,7 +42,8 @@ class ServicesCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("S/ 100.00", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.indigo),),
-                  Text("500", style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal),),
+                  Text("expires", style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal),),
+                  Text("10/10/21", style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal),),
                 ],
               ),
 
