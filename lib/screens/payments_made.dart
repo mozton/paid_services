@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class PaymentsMadeScreen extends StatelessWidget {
    
-  const PaymentsMadeScreen({Key? key}) : super(key: key);
+  const PaymentsMadeScreen({super.key});
   
   @override
   Widget build(BuildContext context) {

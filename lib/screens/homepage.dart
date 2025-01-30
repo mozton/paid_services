@@ -114,10 +114,10 @@ class _HomePageState extends State<HomePage> {
 
                               const  SizedBox(height: 10),
 
-                        Column(
+                        const Column(
                            crossAxisAlignment: CrossAxisAlignment.start,
                            children: [
-                            const Row(
+                            Row(
                               children: [
                         
                                 
@@ -128,16 +128,16 @@ class _HomePageState extends State<HomePage> {
                         
                          
                             ),  
-                            const SizedBox(height: 15),
+                            SizedBox(height: 15),
                          ServicesCard (),
-                            const SizedBox(height: 15),
+                            SizedBox(height: 15),
                       
                          ServicesCard (),
-                            const SizedBox(height: 15),
+                           SizedBox(height: 15),
    ServicesCard (),
-                            const SizedBox(height: 15),
+                            SizedBox(height: 15),
    ServicesCard (),
-                            const SizedBox(height: 15),
+                            SizedBox(height: 15),
  
 
                                    
