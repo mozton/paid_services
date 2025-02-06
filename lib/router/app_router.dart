@@ -1,45 +1,30 @@
-import 'package:flutter/material.dart';
-import 'package:paid_services/model/menu_option.dart';
-import 'package:paid_services/screens/homepage.dart';
-// import 'package:paid_services/screens/manage_services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:paid_services/screens/add_paymet.dart';
+import 'package:paid_services/screens/home_page_screen.dart';
+import 'package:paid_services/screens/add_services_screen.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+part 'app_router.g.dart';
 
-class AppRoutes {
-
-  static const initialRoute = 'manage_services';
-
-  static final menuOptions = <MenuOption>[
-    // TODO: borrar home
-    // MenuOption(route: 'home', name: 'Home Screen', screen: const HomeScreen(), icon: Icons.home_max_sharp ),
-    // MenuOption(route: 'manager_services', name: 'Manager Services', screen: const ManageServices(), icon: Icons.list_alt ),
-   
-  ];
-
-
-  static Map<String, Widget Function(BuildContext)> getAppRoutes() {
-
-    Map<String, Widget Function(BuildContext)> appRoutes = {};
-    appRoutes.addAll({ 'home' : ( BuildContext context ) => const HomePage() });
-
-    for (final option in menuOptions ) {
-      appRoutes.addAll({ option.route : ( BuildContext context ) => option.screen });
-    }
-
-    return appRoutes;
-  }
-
-  // static Map<String, Widget Function(BuildContext)> routes = {
-  //   'manager_services'     : ( BuildContext context ) => const ManageServices(),
-  //   'listview1': ( BuildContext context ) => const Listview1Screen(),
-  //   'listview2': ( BuildContext context ) => const Listview2Screen(),
-  //   'alert'    : ( BuildContext context ) => const AlertScreen(),
-  //   'card'     : ( BuildContext context ) => const CardScreen(),
-  // };
-
-  static Route<dynamic> onGenerateRoute( RouteSettings settings) {        
-      return MaterialPageRoute(
-          builder: (context) => const HomePage(),
-      );
-  }
-
+@riverpod
+GoRouter appRouter(Ref ref) {
+  return GoRouter(routes: [
+    GoRoute(
+      path: "/",
+      builder: (context, state) => const HomePageScreen(),
+    ),
+    GoRoute(
+      path: "add_payment",
+      builder: (context, state) => const AddPaymetScreen(),
+    ),
+    GoRoute(
+      path: "manage_services",
+      builder: (context, state) => const AddServicesScreen(),
+    ),
+    GoRoute(
+      path: "homepage",
+      builder: (context, state) => const HomePageScreen(),
+    ),
+  ]);
 }

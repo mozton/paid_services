@@ -8,7 +8,7 @@ class AddPaymetScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title:const Text("Add Payment"),),
-      body: Center(
+      body: const Center(
          child: Text("data"),
       ));
     
