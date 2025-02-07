@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:paid_services/screens/add_paymet.dart';
 import 'package:paid_services/screens/home_page_screen.dart';
 import 'package:paid_services/screens/add_services_screen.dart';
-import 'package:paid_services/screens/text_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_router.g.dart';

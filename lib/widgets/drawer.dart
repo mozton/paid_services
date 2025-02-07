@@ -12,8 +12,6 @@ class DrawerScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final TextEditingController dateController = TextEditingController();
-
     return Drawer(
       child: ListView(
         children: [

@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ionicons_named/ionicons_named.dart';
 import 'package:paid_services/widgets/custom_input_field.dart';
 import 'package:paid_services/provider/state_notifier.dart';
 import 'package:paid_services/widgets/due_date.dart';
-import 'package:paid_services/widgets/icon_pack.dart';
 import 'package:paid_services/provider/state_notifier.dart' as state;
 
 class AddServicesScreen extends ConsumerStatefulWidget {
@@ -16,19 +14,13 @@ class AddServicesScreen extends ConsumerStatefulWidget {
 }
 
 class _AddServicesScreenState extends ConsumerState<AddServicesScreen> {
-  IconData selectedIcon = Icons.business;
-  final List<ExampleIcon> icons = [];
+  IconData selectedIcon = Icons.business; // Icono por defecto
+  Color _color = Colors.blue; // Color por defecto
+
   final TextEditingController servicesController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    for (var entry in ionicons.entries) {
-      icons.add(ExampleIcon(entry.value, entry.key));
-    }
-  }
+  final TextEditingController detailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +38,9 @@ class _AddServicesScreenState extends ConsumerState<AddServicesScreen> {
         child: Form(
           child: Column(
             children: [
+              const SizedBox(height: 20),
+
+              // Campos de entrada
               CustomInputField(
                 controller: servicesController,
                 hintText: "Service Name",
@@ -66,10 +61,22 @@ class _AddServicesScreenState extends ConsumerState<AddServicesScreen> {
                 formValues: const {},
                 keyboardType: TextInputType.number,
               ),
-              DueDatePicker(
-                  controller:
-                      dateController), // Aquí usamos el controller de la fecha
+
+              CustomInputField(
+                controller: detailController,
+                hintText: "Detail",
+                labelText: "Detail",
+                helperText: "Detail of the service",
+                icon: Icons.label_outlined,
+                formProperty: '',
+                formValues: const {},
+                keyboardType: TextInputType.text,
+              ),
+              DueDatePicker(controller: dateController),
+
               const SizedBox(height: 20),
+
+              // Botón de guardar
               ElevatedButton(
                 onPressed: () {
                   final name = servicesController.text;
@@ -77,14 +84,18 @@ class _AddServicesScreenState extends ConsumerState<AddServicesScreen> {
                   final date = dateController.text;
 
                   if (name.isNotEmpty && amount > 0 && date.isNotEmpty) {
-                    ref
-                        .read(servicesProvider.notifier)
-                        .addService(name, amount, date, selectedIcon);
+                    ref.read(servicesProvider.notifier).addService(
+                          name,
+                          amount,
+                          date,
+                          selectedIcon,
+                          _color,
+                        );
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Service Added")),
                     );
                   }
-                  print([name, amount, date]);
                 },
                 child: const Text("Save"),
               ),

@@ -4,6 +4,7 @@ import "package:uuid/uuid.dart";
 
 const Uuid uuid = Uuid();
 
+// Modelo Service con copyWith mejorado
 class Service {
   final String id;
   final String name;
@@ -11,6 +12,7 @@ class Service {
   final String date;
   final IconData icon;
   final bool isPay;
+  final Color colors;
 
   Service({
     required this.id,
@@ -19,34 +21,38 @@ class Service {
     required this.amount,
     required this.date,
     this.isPay = false,
+    required this.colors,
   });
 
-  // Metodo para crear copia de valores modificados
-
-  Service copyWith({bool? isPay}) {
+  // Método copyWith para actualizar valores dinámicamente
+  Service copyWith({
+    String? id,
+    String? name,
+    double? amount,
+    String? date,
+    IconData? icon,
+    bool? isPay,
+    Color? colors,
+  }) {
     return Service(
-      id: id,
-      icon: icon,
-      name: name,
-      amount: amount,
-      date: date,
+      id: id ?? this.id,
+      icon: icon ?? this.icon,
+      name: name ?? this.name,
+      amount: amount ?? this.amount,
+      date: date ?? this.date,
       isPay: isPay ?? this.isPay,
+      colors: colors ?? this.colors,
     );
   }
 }
-// Notifier para manejar lista de servicio
 
+// Notifier para manejar lista de servicios
 class ServiceNotifier extends StateNotifier<List<Service>> {
   ServiceNotifier() : super([]);
 
-// Metodo para agregar nuevo servicio
-
+  // Método para agregar un nuevo servicio
   void addService(
-    String name,
-    double amount,
-    String date,
-    IconData iconData,
-  ) {
+      String name, double amount, String date, IconData iconData, Color color) {
     state = [
       ...state,
       Service(
@@ -55,16 +61,17 @@ class ServiceNotifier extends StateNotifier<List<Service>> {
         amount: amount,
         date: date,
         icon: iconData,
+        colors: color,
       ),
     ];
   }
 
-// Método para eliminar un servicio por ID
+  // Método para eliminar un servicio por ID
   void removeService(String serviceId) {
     state = state.where((service) => service.id != serviceId).toList();
   }
 
-// Marcar como Pagado o no pagado
+  // Método para marcar como Pagado o No Pagado
   void togglePayStatus(String serviceId) {
     state = state.map((service) {
       if (service.id == serviceId) {
@@ -73,10 +80,29 @@ class ServiceNotifier extends StateNotifier<List<Service>> {
       return service;
     }).toList();
   }
+
+  // Método para actualizar el icono de un servicio
+  void updateServiceIcon(String serviceId, IconData newIcon) {
+    state = state.map((service) {
+      if (service.id == serviceId) {
+        return service.copyWith(icon: newIcon);
+      }
+      return service;
+    }).toList();
+  }
+
+  // Método para actualizar el color de un servicio
+  void updateServiceColor(String serviceId, Color newColor) {
+    state = state.map((service) {
+      if (service.id == serviceId) {
+        return service.copyWith(colors: newColor);
+      }
+      return service;
+    }).toList();
+  }
 }
 
 // Providers
-
 final servicesProvider =
     StateNotifierProvider<ServiceNotifier, List<Service>>((ref) {
   return ServiceNotifier();

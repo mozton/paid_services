@@ -7,6 +7,7 @@ class ServicesCard extends StatelessWidget {
   final double amount;
   final String date;
   final IconData icon;
+  final Color color;
   final bool isPay;
   final VoidCallback onDelete;
   final VoidCallback onTogglePay;
@@ -21,6 +22,7 @@ class ServicesCard extends StatelessWidget {
     required this.isPay,
     required this.onDelete,
     required this.onTogglePay,
+    required this.color,
   });
 
   @override
@@ -68,7 +70,7 @@ class ServicesCard extends StatelessWidget {
             const SizedBox(width: 15),
             Icon(
               icon,
-              color: isPay ? Colors.green : Colors.blueGrey,
+              color: color,
               size: 35,
             ),
             const SizedBox(width: 10),
@@ -108,7 +110,7 @@ class ServicesCard extends StatelessWidget {
                   ),
                 ),
                 const Text(
-                  "Vence el",
+                  "expire",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
                 ),
                 Text(

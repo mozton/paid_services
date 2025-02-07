@@ -76,6 +76,7 @@ class ServicesScreen extends ConsumerWidget {
                       amount: service.amount,
                       date: service.date,
                       icon: service.icon,
+                      color: service.colors,
                       isPay: service.isPay,
                       onDelete: () {
                         ref
