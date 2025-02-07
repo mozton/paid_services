@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paid_services/router/app_router.dart';
 import 'package:paid_services/screens/config_screen.dart';
+import 'package:paid_services/screens/home_page_screen.dart';
 import 'package:paid_services/screens/services_screen.dart';
 
 import 'package:paid_services/screens/add_services_screen.dart';
-import 'package:paid_services/widgets/due_date.dart';
 
 class DrawerScreen extends ConsumerWidget {
   const DrawerScreen({super.key});
@@ -29,7 +29,7 @@ class DrawerScreen extends ConsumerWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ServicesScreen()));
+                              builder: (context) => const HomePageScreen()));
                       ref.read(appRouterProvider);
                     },
                     icon: const Icon(
@@ -72,17 +72,15 @@ class DrawerScreen extends ConsumerWidget {
                 ref.read(appRouterProvider);
               },
               child: const Text("Configuration")),
-          TextButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            DueDatePicker(controller: dateController)));
-
-                ref.read(appRouterProvider);
-              },
-              child: const Text("Text")),
+          // TextButton(
+          //     onPressed: () {
+          //       Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //               builder: (context) => const DashboardScreen()));
+          //       ref.read(appRouterProvider);
+          //     },
+          //     child: const Text("Text")),
         ],
       ),
     );
