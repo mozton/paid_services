@@ -13,16 +13,17 @@ class Service {
   final IconData icon;
   final bool isPay;
   final Color colors;
+  final String? detail;
 
-  Service({
-    required this.id,
-    required this.icon,
-    required this.name,
-    required this.amount,
-    required this.date,
-    this.isPay = false,
-    required this.colors,
-  });
+  Service(
+      {required this.id,
+      required this.icon,
+      required this.name,
+      required this.amount,
+      required this.date,
+      this.isPay = false,
+      required this.colors,
+      this.detail});
 
   // Método copyWith para actualizar valores dinámicamente
   Service copyWith({
@@ -33,6 +34,7 @@ class Service {
     IconData? icon,
     bool? isPay,
     Color? colors,
+    String? detail,
   }) {
     return Service(
       id: id ?? this.id,
@@ -42,6 +44,7 @@ class Service {
       date: date ?? this.date,
       isPay: isPay ?? this.isPay,
       colors: colors ?? this.colors,
+      detail: detail ?? this.detail,
     );
   }
 }
@@ -51,8 +54,8 @@ class ServiceNotifier extends StateNotifier<List<Service>> {
   ServiceNotifier() : super([]);
 
   // Método para agregar un nuevo servicio
-  void addService(
-      String name, double amount, String date, IconData iconData, Color color) {
+  void addService(String name, double amount, String date, IconData iconData,
+      Color color, String detail) {
     state = [
       ...state,
       Service(
@@ -62,6 +65,7 @@ class ServiceNotifier extends StateNotifier<List<Service>> {
         date: date,
         icon: iconData,
         colors: color,
+        detail: detail,
       ),
     ];
   }

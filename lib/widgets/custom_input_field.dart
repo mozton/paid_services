@@ -10,9 +10,10 @@ class CustomInputField extends StatelessWidget {
   final bool obscureText;
   final int? intText;
   final TextEditingController controller;
-
+  final Function? onTap;
   final String formProperty;
   final Map<String, String> formValues;
+  final bool? onTapAlwaysCalled;
 
   const CustomInputField({
     super.key,
@@ -27,6 +28,8 @@ class CustomInputField extends StatelessWidget {
     required this.formValues,
     this.intText,
     required this.controller,
+    this.onTap,
+    this.onTapAlwaysCalled = false,
   });
 
   @override
@@ -37,6 +40,8 @@ class CustomInputField extends StatelessWidget {
         textCapitalization: TextCapitalization.words,
         keyboardType: keyboardType,
         obscureText: obscureText,
+        onTapAlwaysCalled: false,
+
         //  onChanged: ( value ) => formValues[formProperty] = value,
         validator: (value) {
           if (value == null) return 'Este campo es requerido';
@@ -44,9 +49,9 @@ class CustomInputField extends StatelessWidget {
         },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
-          // hintText: hintText,
+          hintText: hintText,
           labelText: labelText,
-          // helperText: helperText,
+          helperText: helperText,
           // prefixIcon: Icon( Icons.verified_user_outlined ),
           suffixIcon: suffixIcon == null ? null : Icon(suffixIcon),
           icon: icon == null ? null : Icon(icon),

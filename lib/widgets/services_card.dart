@@ -11,19 +11,20 @@ class ServicesCard extends StatelessWidget {
   final bool isPay;
   final VoidCallback onDelete;
   final VoidCallback onTogglePay;
+  final String? detail;
 
-  const ServicesCard({
-    super.key,
-    required this.id,
-    required this.name,
-    required this.amount,
-    required this.date,
-    required this.icon,
-    required this.isPay,
-    required this.onDelete,
-    required this.onTogglePay,
-    required this.color,
-  });
+  const ServicesCard(
+      {super.key,
+      required this.id,
+      required this.name,
+      required this.amount,
+      required this.date,
+      required this.icon,
+      required this.isPay,
+      required this.onDelete,
+      required this.onTogglePay,
+      required this.color,
+      this.detail});
 
   @override
   Widget build(BuildContext context) {
@@ -87,13 +88,14 @@ class ServicesCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  isPay ? "Pay" : "Pendin",
+                  isPay ? "Paid" : "Pendin",
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
                     color: isPay ? Colors.green : Colors.red,
                   ),
                 ),
+                Text(detail!.isEmpty ? "" : detail!)
               ],
             ),
             const Spacer(),

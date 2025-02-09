@@ -66,6 +66,7 @@ class ServicesScreen extends ConsumerWidget {
               const SizedBox(height: 15),
               Expanded(
                 child: ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: services.length,
                   itemBuilder: (context, index) {
                     final service = services[index];
@@ -78,6 +79,7 @@ class ServicesScreen extends ConsumerWidget {
                       icon: service.icon,
                       color: service.colors,
                       isPay: service.isPay,
+                      detail: service.detail!,
                       onDelete: () {
                         ref
                             .read(servicesProvider.notifier)

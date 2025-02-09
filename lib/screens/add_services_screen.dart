@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:paid_services/provider/date_notifier.dart';
 import 'package:paid_services/widgets/custom_input_field.dart';
 import 'package:paid_services/provider/state_notifier.dart';
-import 'package:paid_services/widgets/due_date.dart';
-import 'package:paid_services/provider/state_notifier.dart' as state;
 
 class AddServicesScreen extends ConsumerStatefulWidget {
   const AddServicesScreen({super.key});
@@ -23,11 +22,16 @@ class _AddServicesScreenState extends ConsumerState<AddServicesScreen> {
   final TextEditingController detailController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
-    final dueDate = ref.watch(state.dueDateProvider);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
 
-    // Actualizamos el controller de fecha para que se muestre la fecha actual de dueDate
-    dateController.text = "${dueDate?.day}/${dueDate?.month}/${dueDate?.year}";
+  @override
+  Widget build(BuildContext context) {
+    final selectedDueDate = ref.watch(dateProvider);
+    ref.listen<DateTime>(dateProvider, (previous, next) {
+      dateController.text = next.toLocal().toString().split(" ")[0];
+    });
 
     return Scaffold(
       appBar: AppBar(
@@ -66,31 +70,39 @@ class _AddServicesScreenState extends ConsumerState<AddServicesScreen> {
                 controller: detailController,
                 hintText: "Detail",
                 labelText: "Detail",
-                helperText: "Detail of the service",
+                //   helperText: "Detail of the service",
                 icon: Icons.label_outlined,
                 formProperty: '',
                 formValues: const {},
                 keyboardType: TextInputType.text,
               ),
-              DueDatePicker(controller: dateController),
+
+              CustomInputField(
+                  controller: dateController,
+                  hintText: "",
+                  labelText: "Date",
+                  helperText: "Due Date",
+                  icon: Icons.date_range_outlined,
+                  formProperty: '',
+                  formValues: const {},
+                  keyboardType: TextInputType.datetime,
+                  onTapAlwaysCalled: true,
+                  onTap: showModalBottomSheet),
 
               const SizedBox(height: 20),
 
-              // Botón de guardar
+              // Botton Save
               ElevatedButton(
                 onPressed: () {
                   final name = servicesController.text;
                   final amount = double.tryParse(amountController.text) ?? 0;
-                  final date = dateController.text;
+                  final date =
+                      selectedDueDate.toLocal().toString().split(" ")[0];
+                  final detail = detailController.text;
 
                   if (name.isNotEmpty && amount > 0 && date.isNotEmpty) {
                     ref.read(servicesProvider.notifier).addService(
-                          name,
-                          amount,
-                          date,
-                          selectedIcon,
-                          _color,
-                        );
+                        name, amount, date, selectedIcon, _color, detail);
 
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Service Added")),
