@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:paid_services/screens/add_paymet.dart';
+import 'package:paid_services/screens/edit_services_screen.dart';
 import 'package:paid_services/screens/home_page_screen.dart';
 import 'package:paid_services/screens/add_services_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -26,9 +27,15 @@ GoRouter appRouter(Ref ref) {
       path: "homepage",
       builder: (context, state) => const HomePageScreen(),
     ),
-    // GoRoute(
+    GoRoute(
+      path: "homepage",
+      builder: (context, state) => const EditServicesScreen(),
+    ),
+
+    //   GoRoute(
     //   path: "homepage",
-    //   builder: (context, state) => const DashboardScreen(),
+    //   builder: (context, state) => const EditServicesScreen(),
     // ),
+  
   ]);
 }

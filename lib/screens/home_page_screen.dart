@@ -10,21 +10,18 @@ class HomePageScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final services = ref.watch(servicesProvider);
 
-    // Sumar el total de los servicios pendientes
+    // 📌 Calcular totales
     final double pendingTotal = services
-        .where((s) => !s.isPay) // Filtra solo los pendientes
+        .where((s) => !s.isPay)
         .fold(0, (sum, service) => sum + service.amount);
 
-    // Sumar el total de los servicios pagados
     final double paidTotal = services
-        .where((s) => s.isPay) // Filtra solo los pagados
+        .where((s) => s.isPay)
         .fold(0, (sum, service) => sum + service.amount);
 
     return Scaffold(
       drawer: const DrawerScreen(),
-      appBar: AppBar(
-        title: const Text("Home"),
-      ),
+      appBar: AppBar(title: const Text("Inicio")),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -36,12 +33,12 @@ class HomePageScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 20),
 
-            //  Tarjeta para Total Pendiente
+            // 📌 Tarjeta para Total Pendiente
             _buildCard("Total Pendiente", pendingTotal, Colors.orange),
 
             const SizedBox(height: 15),
 
-            //  Tarjeta para Total Pagado
+            // 📌 Tarjeta para Total Pagado
             _buildCard("Total Pagado", paidTotal, Colors.green),
           ],
         ),

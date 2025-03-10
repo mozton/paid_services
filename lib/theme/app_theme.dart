@@ -31,6 +31,13 @@ class AppTheme {
     return ThemeData(
       primarySwatch: Colors.blue,
       brightness: Brightness.dark,
+      appBarTheme: const AppBarTheme(color: Colors.black),
+      textTheme: const TextTheme(bodyLarge: TextStyle(color: Colors.black), // General text
+          bodyMedium: TextStyle(color: Colors.black), // Smaller text
+          titleLarge: TextStyle(color: Colors.red), // Headlines)
+          
+      ),
+  
       // Otros ajustes del tema oscuro
     );
   }
